@@ -1,9 +1,3 @@
-## Why do we need to define types?
-- Earlier detection of errors which in turn speeds development
-- No run-time penalty for determining type.
-- Clean code. This allows developers to write more robust code and maintain it, resulting in better, cleaner code.
-- Makes it easier for fellow developers to understand and use the already written code.
-
 ## Where should the types be defined?
 > NOTE: These conventions apply to the files in Angular.
 
@@ -46,6 +40,10 @@ class ExampleClass {
 
 ## Defining types for a third party library
 
+### Check if the library already has types
+- Some libraries already have types along with them.
+- Check if the library has types in [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
+
 ### Find the source code of the third party library
 
 For adding type definitions for a js library, the first step is to find the source code of the library.
@@ -70,6 +68,9 @@ For writing custom definitions, existing type definitions in [DefinitelyTyped](h
 
 
 Refer [this doc](https://docs.google.com/document/d/19V1d46DSRgTC9K2StZAcgUABpaRjzSzYaEVZIRo_Mlk/edit?usp=sharing) for detailed instructions & example.
+
+## Typescript interfaces
+You can read the detailed documentation on interfaces [here](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
 ## Some Coding Style Conventions
 
