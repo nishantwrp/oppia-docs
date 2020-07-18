@@ -101,6 +101,8 @@ Avoid **exporting** these kind of types unless its **necessary** to do so.
 ### The interfaces should not begin with `I`
 The interfaces should not have an extra `I`. For example `IAnswerStats` should just be `AnswerStats`.
 
+We use them mainly in the places where we have to define types for objects or dicts. Mostly in `*backend-api.service.ts` and `*object.factory.ts` files.
+
 ## Advanced types
 These are just a few example of Advanced Types that we use. For full documentaion go [here](https://www.typescriptlang.org/docs/handbook/advanced-types.html).
 
