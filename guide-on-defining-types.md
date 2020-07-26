@@ -4,9 +4,9 @@
   * [Functions](#functions)
   * [Classes](#classes)
 - [How to determine the types while migrating to Angular?](#how-to-determine-the-types-while-migrating-to-angular-)
-- [Defining types for a third party library](#defining-types-for-a-third-party-library)
+- [Defining types for a third-party library](#defining-types-for-a-third-party-library)
   * [Check if the library already has types](#check-if-the-library-already-has-types)
-  * [Find the source code of the third party library](#find-the-source-code-of-the-third-party-library)
+  * [Find the source code of the third-party library](#find-the-source-code-of-the-third-party-library)
   * [Create a file for the type definitions](#create-a-file-for-the-type-definitions)
   * [Write the type definitions](#write-the-type-definitions)
   * [Updating the version of the library](#updating-the-version-of-the-library)
@@ -69,16 +69,16 @@ Determining types of variables is often an easy job. Most of the time, the types
 
 Also, if you are working on a backend api service, you can try to look at the corresponding backend Python `controllers` file to check the response dict. The backend `controller` and `domain` layers have docstrings which clearly explain the types of data that are passed to the frontend.
 
-## Defining types for a third party library
+## Defining types for a third-party library
 
 First of all check if the library already has types -
 - Some libraries already have types along with them. If yes, you need not do anything.
-- Check if the library has types in [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped). If yes, you can just install the types using `yarn`.
+- Check if the library has types in [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped). If yes, you can just install the types using `yarn`. For example, you need types for node. You can install them using command `yarn add @types/node --dev`.
 
 
 If the library doesn't have any types. You'll have to write types for the lib using the following instructions.
 
-1.  Find the source code of the third party library
+1.  Find the source code of the third-party library
 
     For adding type definitions for a js library, the first step is to find the source code of the library.
 
@@ -95,6 +95,10 @@ If the library doesn't have any types. You'll have to write types for the lib us
 
 
 Refer [this doc](https://docs.google.com/document/d/19V1d46DSRgTC9K2StZAcgUABpaRjzSzYaEVZIRo_Mlk/edit?usp=sharing) for detailed instructions & example.
+
+Sample PRs
+- [Type definitions for guppy](https://github.com/oppia/oppia/pull/9278)
+- [Type definitions for midi, skulpt, math expressions](https://github.com/oppia/oppia/pull/9266)
 
 When updating the version of the library look for the difference in the code of the library compared to the present version. Update the type definitions accordingly if the arguments or return types are modified, or some new functions or variables are defined.
 
