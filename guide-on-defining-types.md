@@ -5,11 +5,6 @@
   * [Classes](#classes)
 - [How to determine the types while migrating to Angular?](#how-to-determine-the-types-while-migrating-to-angular-)
 - [Defining types for a third-party library](#defining-types-for-a-third-party-library)
-  * [Check if the library already has types](#check-if-the-library-already-has-types)
-  * [Find the source code of the third-party library](#find-the-source-code-of-the-third-party-library)
-  * [Create a file for the type definitions](#create-a-file-for-the-type-definitions)
-  * [Write the type definitions](#write-the-type-definitions)
-  * [Updating the version of the library](#updating-the-version-of-the-library)
 - [Typescript interfaces](#typescript-interfaces)
 - [Some Coding Style Conventions](#some-coding-style-conventions)
   * [Using string, number, boolean and array as types](#using-string--number--boolean-and-array-as-types)
@@ -18,7 +13,7 @@
   * [The interfaces should not begin with `I`](#the-interfaces-should-not-begin-with-i)
 - [Advanced types](#advanced-types)
   * [Union Types](#union-types)
-  * [Discrimated Unions](#discrimated-unions)
+  * [Discriminated Unions](#discriminated-unions)
   * [Conditional Types](#conditional-types)
   * [Example](#example)
 
@@ -132,7 +127,7 @@ type A<T> = {
 };
 ```
 
-Avoid **exporting** these kind of types unless its **necessary** to do so because other developers may be confused on how to use that generic type and what arugments does it need. So, it's better to not export these generic types.
+Avoid **exporting** these kind of types unless its **necessary** to do so because other developers may be confused on how to use that generic type and what arguments does it need. So, it's better to not export these generic types.
 
 ### The interfaces should not begin with `I`
 The interfaces should not have an extra `I`. For example `IAnswerStats` should just be `AnswerStats`.
@@ -234,9 +229,9 @@ type T4 = TypeName<string[]>;  // "object"
 ```
 
 ### Example
-You can refer [this file](https://github.com/oppia/oppia/blob/ef6f64122988057f161bde3e6fd212ed307425a9/core/templates/domain/statistics/LearnerActionObjectFactory.ts) to check a example where Discriminated Unions and Conditional Types are both used to build strict types.
+You can refer [this file](https://github.com/oppia/oppia/blob/ef6f64122988057f161bde3e6fd212ed307425a9/core/templates/domain/statistics/LearnerActionObjectFactory.ts) to check an example where Discriminated Unions and Conditional Types are both used to build strict types.
 
-In this file the `Learner Action` has a `action_type` and `action_customization_args` which are interdependent i.e. the schema of customization args depend on the action type.
+In this file the `Learner Action` has an `action_type` and `action_customization_args` which are interdependent i.e. the schema of customization args depend on the action type.
 So, here first we defined a generic type that changes its type according to the type parameter.
 
 ```typescript
