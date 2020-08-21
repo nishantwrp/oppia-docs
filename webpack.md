@@ -52,7 +52,7 @@ The name given to the chunk before the colon (:) i.e. `about` in this case will 
 In the `plugins` property, we define the plugins we use with webpack. We currently use the following three plugins.
 
 #### HtmlWebpackPlugin
-This basically helps us with loading the built webpack bundles as script imports in the html files, providing meta tags for our templates, etc. We add an instance of this plugin for every page like as follows.
+This basically helps us with loading the built webpack bundles as script imports in the html files, providing meta tags for our templates, etc. We add an instance of this plugin for every page like
 
 ```typescript
 new HtmlWebpackPlugin({
@@ -72,7 +72,7 @@ new HtmlWebpackPlugin({
 }),
 ```
 
-Here the `chunks` contain a chunk whose name should be the same as the same we gave to its chunk in the entry component above.
+Here the `chunks` contain a chunk whose name should be same as the name we gave to its chunk in the entry component above.
 
 Similar to the `.import.ts` files all the pages i.e. all the folders in `core/templates/pages/` directory contain a `.mainpage.html` file that serves as the main html template for that page. As you can see we set the `template` and `filename` properties according to this file.
 
@@ -105,7 +105,7 @@ The `externals` property is used to define the external libs that are not includ
 ### webpack.common.macros.ts
 
 In this file we have defined two macros i.e. `load` and `loadExtensions`. We use use these in the html template files for loading other html files.
-These kind of work like `require` statement in typescript files.
+These work like `require` statement in typescript files.
 
 Examples where macros are used -> [load](https://github.com/oppia/oppia/blob/424c985d940951a0e5688c272c4dfa54d58db0dd/core/templates/pages/contributor-dashboard-page/contributor-dashboard-page.mainpage.html#L22), [loadExtensions](https://github.com/oppia/oppia/blob/424c985d940951a0e5688c272c4dfa54d58db0dd/extensions/interactions/dependency_html.html#L1).
 
@@ -148,7 +148,7 @@ This is the config that is used while running the dev server using
 
 ### webpack.prod.sourcemap.config.ts and webpack.dev.sourcemap.config.ts
 
-These are the webpack configs that are used for building using sourcemaps. We do not use devtools that use source maps in `webpack.dev.config.ts` and `webpack.prod.config.ts` because building using source maps is slow. Reference -> https://webpack.js.org/configuration/devtool/
+These are the webpack configs that are used for building using source maps. We do not use devtools that use source maps in `webpack.dev.config.ts` and `webpack.prod.config.ts` because building using source maps is slow. Reference -> https://webpack.js.org/configuration/devtool/
 
 This config is used while deploying oppia. You can also build using source maps by adding a `--source_maps` flag in the start script. Like `python -m scripts.start --source_maps`.
 
