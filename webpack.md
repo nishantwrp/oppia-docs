@@ -2,9 +2,7 @@
 Webpack is an open-source JavaScript module bundler. Webpack takes modules with dependencies and generates static assets representing those modules. It takes the dependencies and generates a dependency graph allowing web developers to use a modular approach for their web application development purposes.
 
 ## How we use webpack
-We use Webpack to bundle almost all TypeScript files in our codebase into bundles for every HTML page that we have. Entry points and HTML pages are configurated in [`webpack.config.ts`](https://github.com/oppia/oppia/blob/develop/webpack.config.ts). We use webpack both for dev and prod mode, also when frontend tests and e2e tests are run. There is a section in the [Coding style guide about webpack](https://github.com/oppia/oppia/wiki/Coding-style-guide#webpack).
-
-Later we plan to use Webpack also with dependencies and directives HTML files.
+We use Webpack to bundle almost all TypeScript files in our codebase into bundles for every HTML page that we have. Entry points and HTML pages are configurated in [`webpack.common.config.ts`](https://github.com/oppia/oppia/blob/develop/webpack.common.config.ts). We use webpack both for dev and prod mode, also when frontend tests and e2e tests are run. There is a section in the [Coding style guide about webpack](https://github.com/oppia/oppia/wiki/Coding-style-guide#webpack).
 
 ## Configuration
 
@@ -40,6 +38,8 @@ now whenever webpack sees something like
 require('@angular/upgrade/static');
 ```
 in the code that it's building it automatically resolves the path `@angular/upgrade/bundles/upgrade-static.umd.js`.
+
+Btw, we need this alias for angular migration because of an issue in the `@angular/upgrade` package. Reference -> https://github.com/angular/angular/issues/13137
 
 In the `entry` property, we define the entry files for webpack. Basically, we have an separate entry file for each page. The entry files end with `.import.ts` and and present in each of the folders in `core/templates/pages/`. For example an entry looks something like
 
@@ -148,10 +148,29 @@ This is the config that is used while running the dev server using
 
 ### webpack.prod.sourcemap.config.ts and webpack.dev.sourcemap.config.ts
 
-These are the webpack configs that are used for building using source maps. We do not use devtools that use source maps in `webpack.dev.config.ts` and `webpack.prod.config.ts` because building using source maps is slow. Reference -> https://webpack.js.org/configuration/devtool/
+These are the webpack configs that are used for building using source maps. We do not use devtools that use source maps in `webpack.dev.config.ts` and `webpack.prod.config.ts` because building using source maps is slow. More in [webpack documentation](https://webpack.js.org/configuration/devtool/).
 
 This config is used while deploying oppia. You can also build using source maps by adding a `--source_maps` flag in the start script. Like `python -m scripts.start --source_maps`.
 
+In these config files we use the main config (`webpack.dev.config.ts` or `webpack.prod.config.ts`) and change the devtools used in them. For example this is how `webpack.dev.sourcemap.config.ts` looks like.
+
+```typescript
+const { merge } = require('webpack-merge');
+const dev = require('./webpack.dev.config.ts');
+
+module.exports = merge(dev, {
+  devtool: 'inline-source-map'
+});
+```
+These are the devtools we use
+
+| Config | Devtool |
+| :------: | :-------: |
+| Development | eval |
+| Development + Source Maps | inline-source-map |
+| Production | none |
+| Production + Source Maps | source-map |
+
 ### webpack.terser.config.ts
 
-This config was written so that it can be used in the e2e tests run on circleci. You can refer this [discussion](https://discuss.circleci.com/t/build-fails-with-error-spawn-enomem/30537/10) on why it was needed. This basically disables the parallelism in the teser config.
+This config was written so that it can be used in the e2e tests run on circleci. You can refer this [discussion](https://discuss.circleci.com/t/build-fails-with-error-spawn-enomem/30537/10) on why it was needed. This basically disables the parallelism in the terser config.
