@@ -174,3 +174,11 @@ These are the devtools we use
 ### webpack.terser.config.ts
 
 This config was written so that it can be used in the e2e tests run on circleci. You can refer this [discussion](https://discuss.circleci.com/t/build-fails-with-error-spawn-enomem/30537/10) on why it was needed. This basically disables the parallelism in the terser config.
+
+
+## Common Errors in webpack
+
+### Module not found: Error: Can't resolve '...'
+This is mostly likely caused due to incorrect path mentioned in import or require statements. In this case try to look for errors like spelling mistakes in the path or ensure that a file exists in that path.
+
+If the import statement refers to a third party library. Running `yarn install` should fix this problem.
